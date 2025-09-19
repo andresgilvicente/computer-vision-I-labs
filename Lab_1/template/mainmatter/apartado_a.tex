@@ -1,0 +1,48 @@
+\chapter{Apartado A}
+\label{chapter:tarea_a}
+
+En este apartado se trabajará en la utilización de funciones básicas de OpenCV. Posteriormente, en el apartado B, se utilizarán estas funciones para construir métodos que le serán de utilidad en el futuro.
+
+
+Para este ejercicio, las imágenes se encuentran en la carpeta \textit{data}. De nuevo, se recomienda consultar la documentación de OpenCV para ver como usar las funciones utilizadas y sus argumentos: \texttt{OpenCV Documentation} \footnote{Doc. \href{https://docs.opencv.org/4.8.0/index.html}{OpenCV} \textbf{https://docs.opencv.org/4.8.0/index.html}}. 
+
+
+\section*{Tarea A.1: Carga de una imagen}
+\addcontentsline{toc}{section}{Tarea A.1: Carga de una imagen}
+Utilice la función  \texttt{cv2.imread()} para cargar una imagen de la carpeta \texttt{data}.
+
+
+\section*{Tarea A.2: Visualizar una imagen}
+\addcontentsline{toc}{section}{Tarea B.2: Detección de esquinas de las imágenes}
+Utilice los métodos \texttt{cv2.imshow()}, \texttt{cv2.waitKey()} y \texttt{cv2.destroyAllWindows()} para visualizar la imagen por pantalla.
+
+
+\section*{Tarea A.3: Conversion de imagen de color a escala de grises}
+\addcontentsline{toc}{section}{Tarea A.3: Conversion de imagen de color a escala de grises}
+Utilice el método \texttt{cv2.cvtColor()} para realizar la conversión de BGR a escala de grises. Para obtener el tamaño de la imagen (alto y ancho) y el número de canales, utilice \texttt{.shape}. 
+
+De nuevo, represente la imagen para verificar que se ha realizado correctamente la conversión a escala de grises.
+
+
+\section*{Tarea A.4: Cambio de tamaño de una imagen}
+\addcontentsline{toc}{section}{Tarea A.4: Cambio de tamaño de una imagen}
+
+Utilice la función \texttt{cv2.resize()} para cambiar el tamaño de la imagen a 200x200 píxeles. Como en la tarea anterior obtenga el tamaño de la imagen resultante para verificar que se ha realizado correctamente el cambio de tamaño. Por último, visualice la nueva imagen obtenida con el nuevo tamaño.
+
+
+\section*{Tarea A.5: Recorte de una imagen}
+\addcontentsline{toc}{section}{Tarea A.5: Recorte de una imagen}
+
+Para recortar el centro de una imagen a un tamaño de 120x160 píxeles, primero es necesario conocer las dimensiones originales de la imagen (alto y ancho). A partir de ellas se calcula el punto central y, desde ahí, se determinan las coordenadas de inicio y fin del recorte. El proceso consiste en aplicar un corte (slicing) sobre la matriz de la imagen para obtener únicamente la región central con el tamaño deseado.
+
+\section*{Tarea A.6: Rotación de una imagen}
+\addcontentsline{toc}{section}{A.6: Rotación de una imagen}
+
+Para rotar una imagen en OpenCV se utiliza la combinación de dos funciones: \texttt{cv2.getRotationMatrix2D()} y \texttt{cv2.warpAffine()}.
+Con \texttt{cv2.getRotationMatrix2D()} se genera la matriz de transformación de rotación, indicando el punto central de la imagen, el ángulo de rotación y un factor de escala (normalmente 1.0 si no se quiere redimensionar).
+Luego, con \texttt{cv2.warpAffine()} se aplica dicha transformación a la imagen original, produciendo la versión rotada. Esta función necesita la matriz de rotación y el tamaño de salida (ancho y alto de la imagen).
+
+\section*{Tarea A.7: Escritura en disco de una imagen}
+\addcontentsline{toc}{section}{A.7: Escritura en disco de una imagen}
+Utilice el método \texttt{cv2.imwrite()} para realizar la escritura de la imagen en un fichero en disco.
+
