@@ -1,102 +1,86 @@
-\chapter{Apartado A: \textbf{Segmentación por color}}
+\chapter{Apartado A}
 \label{chapter:tarea_a}
 
-En este apartado deberá segmentar los colores blancos y naranjas que aparecen en las imágenes disponibles en la carpeta \texttt{data}. Segmentar por colores es una técnica sencilla y útil en aplicaciones en las que se tiene un gran control sobre las condiciones de contorno: iluminación, tipo de objeto que se espera encontrar, color del fondo, etc. A continuación se añaden algunos comentarios para resolver paso a paso la tarea:
-
-\section*{Tarea A.1: Carga de imágenes}
-\phantomsection
-\addcontentsline{toc}{section}{Tarea A.1: Carga de imágenes}
-
-Para trabajar de forma eficiente, antes de empezar a procesar imágenes deberá definir algunos métodos auxiliares. El primero de ellos es un método que debe cargar imágenes de la carpeta \texttt{data}.
-
-\section*{Tarea A.2: Visualización y guardado de imágenes}
-\addcontentsline{toc}{section}{Tarea A.2: Visualización y guardado de imágenes}
-
-De nuevo, estos métodos ya los utilizó en la 1ª sesión de laboratorio, así que aproveche este paso para afianzar conceptos. Defina los métodos para visualizar imágenes y guardarlas. Respete y utilice todos los argumentos que se proporcionan.
-
-\section*{Tarea A.3: Cambio de espacio de color}
-\addcontentsline{toc}{section}{Tarea A.3: Cambio de espacio de color}
-
-Cambie el espacio de color de las imágenes (BGR) a uno donde la crominancia e intensidad estén separados (HSV). Puede interpretar este paso como un cambio de sistema de referencia (cartesiano a polar). De esta forma, le será más fácil discriminar los colores de interés. La Figura \ref{fig:color_spaces} \footnote{ \href{https://commons.wikimedia.org/wiki/File:RGB\_2\_HSV\_conversion\_with\_grid.ogg}{Imagen modificada de VerbaGleb, CC BY-SA 4.0} https://commons.wikimedia.org/wiki/File:RGB\_2\_HSV\_conversion\_with\_grid.ogg} muestra los espacios de colores con los que trabajará.
-
-Para cambiar el espacio de color de sus imágenes, puede utilizar el método \texttt{cv2.cvtColor()} de OpenCV. Tenga en cuenta que OpenCV cuenta con una gran cantidad de espacios de color, visite la documentación. \footnote{ \href{https://docs.opencv.org/3.4/d8/d01/group\_\_imgproc\_\_color\_\_conversions.html}{Espacios de color de OpenCV} https://docs.opencv.org/3.4/d8/d01/group\_\_imgproc\_\_color\_\_conversions.html}
-
-
+El objetivo del \textit{Apartado A} es conseguir los parámetros intrínsecos y extrínsecos de las cámaras situadas a la derecha e izquierda de un sistema estereoscópico. En la Figura \ref{fig:stereo_camera} se muestra un ejemplo de cámara estereoscópica \footnote{ \href{https://commons.wikimedia.org/w/index.php?curid=8076697}{De John Alan Elson - http://www.3dham.com/, CC BY-SA 4.0, } https://commons.wikimedia.org/w/index.php?curid=8076697} (no digital). Con estos parámetros se obtiene un modelo de cámara para cada subsistema.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{Lab_2/template/figures/color_spaces.png}
-    \caption{Espacios de color utilizados. Gráfico A: BGR (atención con el orden de canales en OpenCV) y Gráfico B: HSV.}
-    
-    \label{fig:color_spaces}
+    \includegraphics[width=0.5\textwidth]{Lab_2/template/figures/stereo_camera.jpg}
+    \caption{Cámara estereoscópica.}
+    \label{fig:stereo_camera}
 \end{figure}
 
-\section*{Tarea A.4: Segmentación de las partes naranjas}
-\addcontentsline{toc}{section}{Tarea A.4: Segmentación de las partes naranjas}
+En este apartado trabajará con el notebook y las imágenes de las carpetas \textit{right} y \textit{left}. En primer lugar, fíjese en la documentación de OpenCV del método \texttt{cv2.calibrateCamera()} \footnote{Doc. \href{https://docs.opencv.org/4.x/d9/d0c/group\_\_calib3d.html\#ga687a1ab946686f0d85ae0363b5af1d7b}{cv2.calibrateCamera()} https://docs.opencv.org/4.x/d9/d0c/group\_\_calib3d.html\#ga687a1ab946686f0d85ae0363b5af1d7b}. Intente detectar los argumentos que requiere este método y cómo podrían derivarse de las imágenes. 
 
-Genere una máscara para cada imagen y realice una segmentación con ella. Una máscara es una imagen binaria (blanca y/o negro) donde los píxeles de interés aparecen en blanco, mientras que los píxeles que no son de interés aparecen en negro. Segmentar implica multiplicar la imagen original con la máscara. Así se obtienen los píxeles de interés de la imagen original.
-
-Para obtener las máscaras y segmentar la imagen, puede utilizar respectivamente los métodos \texttt{cv2.inRange()} y \texttt{cv2.bitwise\_and()} de OpenCV. Por otro lado, en este paso se facilitan los rangos de color naranja:
-
-\begin{tcolorbox}[colback=gray!85, coltext=white, colframe=white, fonttitle=\bfseries, title=Important Note, boxrule=0.5mm]
-\texttt{light\_orange = (1, 190, 200)}\\
-\texttt{dark\_orange = (255, 255, 255)}
-\end{tcolorbox}
-
-Para confirmar que está obteniendo los resultados adecuados, muestre una de las imágenes iniciales, su máscara y la imagen segmentada.
+Una vez hecho ese ejercicio mental, deberá seguir los pasos de este enunciado para conseguir un modelo de cámara a partir de las imágenes de cada carpeta:
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Lab_2/template/figures/orange.png}
-    \caption{Máscara y segmentación de colores naranjas.}
-    \label{fig:orange_mask}
-\end{figure}
 
-\section*{Tarea A.5: Segmentación de las partes blancas}
-\addcontentsline{toc}{section}{Tarea A.5: Segmentación de las partes blancas}
+\section*{Tarea A.1: Carga de Imágenes}
+\addcontentsline{toc}{section}{Tarea A.1: Carga de Imágenes}
+Defina y ejecute el método para cargar imágenes \texttt{load\_images()}. Deberá pasar una lista que contenga las rutas de todas las imágenes de la carpeta \textit{left}.
 
-En este paso deberá repetir un proceso similar al anterior, pero centrándose en los tonos blancos. Explore el rango de valores necesarios para segmentar los colores blancos de las imágenes. Para ello, juegue con los valores de H, S y V en la interfaz que se le proporciona.
+\section*{Tarea A.2: Detección de Esquinas}
+\addcontentsline{toc}{section}{Tarea A.2: Detección de Esquinas}
+Detecte las esquinas de los patrones usando \texttt{cv2.findChessboardCorners()}. Refine las detecciones con \texttt{cv2.cornerSubPix()}.
 
-De nuevo, para confirmar que está obteniendo los resultados adecuados, muestre la máscara y la imagen segmentada.
+\textbf{Detección.} La función \texttt{cv2.findChessboardCorners()} de OpenCV busca el patrón de calibración en cada imagen y devuelve una tupla con dos elementos. El primer elemento es \texttt{False} si la detección del patrón falla y \texttt{True} si tiene éxito. El segundo elemento contiene las coordenadas de las esquinas del patrón, que solo son válidas si la detección fue exitosa (es decir, si el primer elemento de la tupla es \texttt{True}). Tenga en cuenta que los resultados de la llamada a esta función se almacenan en una lista, de manera que el elemento $i$ de esa lista corresponde al resultado de procesar la imagen $i$ cargada previamente.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Lab_2/template/figures/white.png}
-    \caption{Máscara y segmentación de colores blancos.}
-    \label{fig:whithe_mask}
-\end{figure}
+\textbf{Refinamiento.} Se utiliza la función \texttt{cv2.cornerSubPix()} para refinar las detecciones de las esquinas. Tenga en cuenta que esta función necesita las imágenes de entrada en escala de grises.
 
-\section*{Tarea A.6: Combinación de máscaras}
-\addcontentsline{toc}{section}{Tarea A.6: Combinación de máscaras}
-
-Combine las máscaras de los colores naranja y blanco para cada imagen. Posteriormente, segmente cada imagen con la máscara que ha generado. Como resultado, conseguirá segmentar el cuerpo de los peces en el conjunto imágenes. Debería obtener resultados parecidos al ejemplo de la Figura \ref{fig:fish_output}.
-
-Confirme que está obteniendo los resultados adecuados mostrando la máscara y la imagen segmentada.
+\textbf{Nota:} Inspeccione las imágenes de forma manual y compruebe que el patrón está formado por 8 filas y 6 columnas de esquinas.
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{Lab_2/template/figures/output.png}
-    \caption{Máscara completa y segmentación del pez como combinación de colores blancos y naranjas.}
-    \label{fig:fish_output}
-\end{figure}
+\section*{Tarea A.3: Comprobación de Detecciones}
+\addcontentsline{toc}{section}{Tarea A.3: Comprobación de Detecciones}
+Compruebe que las detecciones anteriores (tanto las iniciales como las refinadas) son correctas dibujando los resultados con \texttt{cv2.drawChessboardCorners()}.
+
+Dibuje en las imágenes los puntos detectados por \texttt{cv2.findChessboardCorners()}. Por razones de eficiencia, la función utilizada modifica directamente las imágenes pasadas por parámetro en lugar de hacer una copia. Para evitar perder las imágenes originales, es mejor hacer una copia de ellas de antemano. Utilice la copia para realizar el ejercicio.
+
+Una vez dibujadas las detecciones, deberá diseñar una función de visualización de imágenes con OpenCV. Para ello, podrá apoyarse en los métodos \texttt{cv2.imshow()}, \texttt{cv2.waitKey()} y \texttt{cv2.imwrite()}.
 
 
-\section*{Tarea A.7: Guardado de imágenes}
-\addcontentsline{toc}{section}{Tarea A.7: Guardado de imágenes}
+\section*{Tarea A.4: Obtención de Coordenadas 3D de las Esquinas del Patrón}
+\addcontentsline{toc}{section}{Tarea A.4: Obtención de Coordenadas 3D de las Esquinas del Patrón}
+Defina y ejecute el método \texttt{get\_chessboard\_points(chessboard\_shape, dx, dy)} que proporcione las coordenadas 3D de las esquinas del patrón.
 
-Guarde las imágenes de interés como resultado de esta parte de la práctica.
+Para ello, el punto de coordenadas $[0, 0, 0]^\top$ es la primera esquina detectada en el patrón de calibración. El eje X corresponde al lado corto del patrón, mientras que el eje Y corresponde al lado largo. La función devolverá un array de \texttt{numpy} de tamaño $ N \times 3 $ que contenga las coordenadas $(x, y, z)$, donde N es el número de esquinas.
 
+Para diseñar la función, tenga en cuenta que \texttt{chessboard\_shape} es una tupla que contiene el número de esquinas por fila y columna del patrón. Por otro lado, \texttt{dx} y \texttt{dy} corresponden al ancho y alto de cada cuadrado del patrón de calibración, que en esta práctica es de $30mm$.
+
+Tenga en cuenta que deberá proporcionar una lista que contenga los puntos para todas las imágenes con detecciones correctas.
+
+
+\section*{Tarea A.5: Calibración de la Cámara Izquierda}
+\addcontentsline{toc}{section}{Tarea A.5: Calibración de la Cámara Izquierda}
+Utilice \texttt{cv2.calibrateCamera()} para obtener los parámetros de calibración para la cámara situada a la izquierda.
+
+Deberá utilizar los resultados de \texttt{cv2.findChessboardCorners()} y el conjunto de puntos obtenido con \texttt{get\_chessboard\_points()} del ejercicio anterior.
+
+Filtre aquellas detecciones de esquinas que hayan sido procesadas correctamente. Recuerde que \texttt{cv2.findChessboardCorners()} devuelve una tupla donde el primer elemento es un Booleano. Este elemento indica si la detección es correcta o no.
+
+
+\newpage
 \section*{Preguntas}
 \addcontentsline{toc}{section}{Preguntas}
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta A.1, halign=left]
-Segmente por color el escudo de su equipo deportivo favorito: descompóngalo en al menos 2 colores. De igual forma que ha realizado en el ejercicio de clase, proporcione las máscaras binarias de cada color. Además, multiplique la máscara con la imagen original para visualizar solamente el color de interés. Por último indique el porcentaje que representa cada color sobre el total del escudo.
+Repita el proceso (carga de imágenes, detección, comprobación de esquinas, etc.) para la cámara situada a la derecha. Deberá adjuntar:
+\begin{itemize}
+    \item Al menos 2 imágenes con la detección de esquinas.
+    \item Los parámetros intrínsecos y extrínsecos de la cámara.
+    \item Los coeficientes de distorsión y el error de calibración.
+\end{itemize}
 \end{tcolorbox}
+
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta A.2, halign=left]
-¿Qué ocurre cuando carga las imágenes con la librería \texttt{imageio} pero las visualiza con la librería \texttt{OpenCV}? Investigue qué puede estar pasando y cómo podría solucionarlo. Pista: cv2.cvtColor().
+¿Observa diferencias entre las detecciones de esquinas realizadas con \texttt{cv2.findChessboardCorners()} y las refinadas con \texttt{cv2.cornerSubPix()}? Apoye su respuesta adjuntando imágenes.
+\end{tcolorbox}
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta A.3, halign=left]
+Por ahora, ha asumido que el número de imágenes que le hemos ofrecido es adecuado para obtener una calibración adecuada. Sin embargo, en su proyecto final, ¿cuántas imágenes cree que debería tomar con su cámara para calibrarla? Responda a esta pregunta y obtenga un orden de magnitud dibujando un diagrama de Pareto. En este, aparecerá el número de imágenes consideradas (eje horizontal) vs. el error de calibración (eje vertical).
 \end{tcolorbox}
