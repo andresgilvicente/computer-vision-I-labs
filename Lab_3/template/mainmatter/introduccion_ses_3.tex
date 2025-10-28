@@ -1,4 +1,4 @@
-\chapter{Sesión 3: Extracción de características y bolsa de palabras visuales}
+\chapter{Sesión 3: Procesamiento de imágenes y extracción de características}
 \label{chapter:introduction_ses_3}
 
 \section{Materiales}
@@ -6,18 +6,13 @@
 En esta práctica se trabajará con los siguientes recursos (puede encontrarlos en la sección de Moodle \textit{Laboratorio/Sesión 3}):
 
 \begin{itemize}
-    \item \textbf{\texttt{partA\_to-do.ipynb}}: notebook con el código que deberá desarrollar en el apartado A.
-    \item \textbf{\texttt{partB\_to-do.ipynb}}: notebook con el código que deberá desarrollar en el apartado B.
+    \item \textbf{\texttt{partA-B\_to-do.ipynb}}: notebook con el código que deberá desarrollar en los apartados A y B.
     \item \textbf{\texttt{partC\_to-do.ipynb}}: notebook con el código que deberá desarrollar en el apartado C.
     \item \textbf{helpers}: Archivos con métodos que le ayudarán a obtener los resultados. 
     \begin{itemize}
-        \item \texttt{image\_classifier.py}
-        \item \texttt{bow.py}
-        \item \texttt{dataset.py}
-        \item \texttt{results.py}
         \item \texttt{utils.py}
     \end{itemize}
-    \item \textbf{data}: carpeta con imágenes para trabajar durante la práctica. Tenga en cuenta que, además, deberá descargar de Moodle el archivo \texttt{dataset.zip} (que deberá descomprimir) para trabajar en el Apartado C.
+    \item \textbf{data}: carpeta con imágenes para trabajar durante la práctica.
 \end{itemize}
 
 \section{Apartados de la práctica}
@@ -26,9 +21,9 @@ La Sesión 3 del laboratorio está dividida en los siguientes apartados:
 
 \begin{itemize}
     \item Librerías: Importación de las librerías que se utilizan en la sesión. Se recomienda realizar la importación en una celda inicial para mantener la organización del Notebook.
-    \item Apartado A: Detección de esquinas.
-    \item Apartado B: Detección de líneas rectas.
-    \item Apartado C: Detección de puntos de interés (C1) y Bolsa de palabras (C2).
+    \item Apartado A: Filtro Gaussiano y Detección de bordes.
+    \item Apartado B: Operadores Morfológicos.
+    \item Apartado C: Detección de esquinas.
 \end{itemize}
 
 \section{Observaciones}
@@ -41,11 +36,11 @@ Es muy importante que trabaje consultando la documentación de OpenCV\footnote{\
 
 \section{Qué va a aprender}
 
-Al finalizar esta práctica, además de detectar características como esquinas y líneas rectas, el alumno aprenderá a construir un diccionario visual a partir de características de varias imágenes, a representar imágenes mediante histogramas de palabras visuales y a clasificar y comparar imágenes basándose en sus características. 
+Al finalizar esta práctica, implementará filtros Gaussianos, y aplicará métodos de detección de bordes como Sobel y Canny. Además, comparará sus implementaciones con las funciones predefinidas en skimage. También utilizará operadores morfológicos y comprenderá su utilidad. Además sabrá como utilizar los detectores de esquinas.
 
 \section{Evaluación}
 
-La nota que obtenga en esta sesión de laboratorio será la misma que obtenga su pareja. Los apartados de la práctica serán evaluados como refleja la Tabla \ref{table:evaluacion}. Tenga en cuenta que en esta práctica la pareja con el mejor valor de \textit{accuracy} en el apartado \textit{Bolsa de palabras} obtendrá 1 punto extra.
+La nota que obtenga en esta sesión de laboratorio será la misma que para ambos miembros de la pareja. Los apartados de la práctica serán evaluados como refleja la Tabla \ref{table:evaluacion}.
 
 \begin{table}[h!]
     \centering
@@ -53,21 +48,17 @@ La nota que obtenga en esta sesión de laboratorio será la misma que obtenga su
     \hline
     \textbf{Tarea} & \textbf{Valor} & \textbf{Resultado} \\
     \hline
-    Pregunta A.1 & 1.5 & \\
+    Pregunta A.1 & 2.0 & \\
     \hline
-    Pregunta A.2 & 1.5 & \\
+    Pregunta A.2 & 2.0 & \\
     \hline
     Pregunta B.1 & 2.0 & \\
     \hline
-    Pregunta C.1 & 1.5 & \\
+    Pregunta C.1 & 2.0 & \\
     \hline
-    Pregunta C.2.A & 1.5 & \\
+    Pregunta C.2 & 2.0& \\
     \hline
-    Pregunta C.2.B & 2.0 & \\
-    \hline
-    Pregunta Extra C.2.C & 1.0 & \\
-    \hline
-    \textbf{Total} & \textbf{11.0} & \\
+    \textbf{Total} & \textbf{10.0} & \\
     \hline
     \end{tabular}
     \caption{Valoración de los apartados de la práctica.}
