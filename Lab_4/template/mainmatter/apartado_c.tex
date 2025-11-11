@@ -1,30 +1,47 @@
-\chapter{Apartado C: \textbf{Filtro de Kalman para Seguimiento de Objetos}}
-\label{chapter:tarea_c}
+\chapter{Apartado C: \textbf{Sustracción de Fondo}}
+\label{chapter:tarea_C}
 
-\section*{Tarea C.1: Configuración del Filtro de Kalman}
+
+\section*{Tarea C.1: Carga de vídeo}
 \phantomsection
-\addcontentsline{toc}{section}{Tarea C.1: Configuración del Filtro de Kalman}
-Para esta tarea vamos a utilizar el video (\texttt{'slow\_traffic\_small.mp4'}), para cargarlo utilice el método que se ha desarrollado anteriormente. Inicialice el filtro de Kalman, para ello haga uso del método \texttt{cv2.KalmanFilter}\footnote{ \href{https://docs.opencv.org/4.8.0/dd/d6a/classcv_1_1KalmanFilter.html}{Documentación del método KalmalFilter en OpenCV:} \\{https://docs.opencv.org/4.8.0/dd/d6a/classcv\_1\_1KalmanFilter.html}} de Opencv, con una matriz de medición y transición adecuada para un seguimiento en dos dimensiones.
+\addcontentsline{toc}{section}{Tarea C.1: Carga de vídeo}
+Cargue el vídeo (\texttt{'visiontraffic.avi'}) en el cual se detectarán objetos en movimiento. Para ello, realice complete el método \texttt{read\_video} que puedrá reutilizar en el resto de tareas. 
 
-Complete el código del bucle que nos permitirá seleccionar el objeto \texttt{(cv2.selectROI)}\footnote{ \href{https://docs.opencv.org/4.8.0/d7/dfc/group\_\_highgui.html\#gaabb58bae304674b429d9102a7155a86e}{Documentación del método para seleccionar la ROI en OpenCV:} \\{https://docs.opencv.org/4.8.0/d7/dfc/group\_\_highgui.html\#gaabb58bae304674b429d9102a7155a86e}} que vamos a seguir. Convierta la región de interés de la imagen a HSV y calcule el histograma \texttt{cv2.calcHist}\footnote{ \href{https://docs.opencv.org/4.8.0/d6/dc7/group\_\_imgproc\_\_hist.html\#ga4b2b5fd75503ff9e6844cc4dcdaed35d}{Documentación del método para calculo de histograma en OpenCV:} \\{https://docs.opencv.org/4.8.0/d6/dc7/group\_\_imgproc\_\_hist.html\#ga4b2b5fd75503ff9e6844cc4dcdaed35d}} con  para el canal con la información de tono (\textit{Hue}).
+\section*{Tarea C.2: Sustracción de fondo mediante diferencia de frames}
+\phantomsection
+\addcontentsline{toc}{section}{Tarea C.2: Sustracción de fondo mediante diferencia de frames}
+Realice una sustracción de fondo mediante diferencia de frames, para ello guarde un frame con el fondo estático y úselo como frame de referencia de fondo.
+
+En primer lugar vamos a iterar sobre la lista de frames para mostrar por pantalla frame a frame e iremos avanzando con pulsando la tecla n, para seleccionar el frame de referencia debera pulsar la tecla s.
+
+Posteriormente se realizará la diferencia de frames entre el frame referencia y el frame actual.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Lab_4/template/figures/roi_selection.png}
-    \caption{Ejemplo de ROI.}
-    \label{fig:ejemplo_ROI_kalman}
+    \includegraphics[width=0.3\textwidth]{Lab_4/template/figures/frame_difference.png}
+    \caption{Ejemplo de resultado con diferencia de frames.}
+    \label{fig:ejemplo_framediff}
 \end{figure}
 
-\section*{Tarea C.2: Predicción y Corrección del Estado}
+\section*{Tarea C.3: Configuración de la Sustracción de Fondo con GMM}
 \phantomsection
-\addcontentsline{toc}{section}{Tarea C.2: Predicción y Corrección del Estado}
-Realice la predicción del estado y corrija la posición estimada en cada iteración.
+\addcontentsline{toc}{section}{Tarea C.3: Configuración de la Sustracción de Fondo con GMM}
+
+Configure el sustractor de fondo usando el modelo de mezcla de gaussianas adaptativas (MOG2). Para ello, usaremos \texttt{cv2.createBackgroundSubtractorMOG2}\footnote{ \href{https://docs.opencv.org/4.8.0/d7/d7b/classcv_1_1BackgroundSubtractorMOG2.html}{Documentación del método MOG2 en OpenCV:} \\{https://docs.opencv.org/4.8.0/d7/d7b/classcv\_1\_1BackgroundSubtractorMOG2.html}}
+
+\section*{Tarea C.4: Aplicación de la Sustracción de Fondo}
+\phantomsection
+\addcontentsline{toc}{section}{Tarea C.4: Aplicación de la Sustracción de Fondo}
+Aplique la sustracción de fondo en cada frame para extraer los objetos en movimiento.
+
+
+Visualice el resultado de la detección de movimiento y guarde el vídeo con las imagenes binarias resultantes en la carpeta \texttt{data/results}. Utilize el método \texttt{cv2.VideoWriter}\footnote{ \href{https://docs.opencv.org/4.8.0/dd/d9e/classcv_1_1VideoWriter.html}{Documentación del método MOG2 en OpenCV:} \\{https://docs.opencv.org/4.8.0/dd/d9e/classcv\_1\_1VideoWriter.html}}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{Lab_4/template/figures/kalman.png}
-    \caption{Ejemplo de seguimiento con filtro de Kalman.}
-    \label{fig:ejemplo_track_kalman}
+    \includegraphics[width=0.3\textwidth]{Lab_4/template/figures/MOG2.png}
+    \caption{Ejemplo de resultado usando MOG2.}
+    \label{fig:ejemplo_mog2}
 \end{figure}
 
 \section*{Preguntas}
@@ -32,10 +49,10 @@ Realice la predicción del estado y corrija la posición estimada en cada iterac
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta C.1, halign=left]
-¿Cómo afecta el valor de \texttt{transitionMatrix} a la predicción en el filtro de Kalman?
+¿Cómo afecta la variable \texttt{varThreshold} a la precisión de la detección?
 \end{tcolorbox}
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=gray!10, colframe=gray!30, coltitle=black, title=Pregunta C.2, halign=left]
-¿Cuál es la diferencia entre \texttt{measurementMatrix} y \texttt{transitionMatrix} en el contexto del seguimiento de objetos?
+¿Qué ventajas presenta \texttt{createBackgroundSubtractorMOG2} frente a métodos simples de diferencia de imágenes?
 \end{tcolorbox}
