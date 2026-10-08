@@ -180,4 +180,3 @@ dependencies:
       - numpy==1.26.0
       - opencv-python==4.8.0.76
       - pillow==11.0.0
-prefix: /Users/erikvelascosalido/miniconda3/envs/voi-lab

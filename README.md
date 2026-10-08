@@ -1,91 +1,53 @@
-<a href="https://x.com/nearcyan/status/1706914605262684394">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/cvi-icai-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/cvi-icai-light.png">
-    <img alt="Descripción de la imagen" src="assets/cvi-icai-light.png">
-  </picture>
-</a>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/cvi-icai-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/cvi-icai-light.png">
+  <img alt="Computer Vision I - ICAI" src="assets/cvi-icai-light.png">
+</picture>
 
+# Computer Vision I — Lab Work
 
-**Welcome to the repository for the *Computer Vision I* course at Comillas ICAI**. Here, you will find all the necessary files to complete the 4 lab sessions of the course, as well as a final lab project. 💻📷
+Lab sessions for **Computer Vision I** (Comillas ICAI), implemented in Python with OpenCV. Each lab has its notebooks and helper code in `src/`, the input images in `data/`, and a LaTeX report template in `template/`. The delivered reports are in [`final_reports/`](final_reports/).
 
-The topics we will cover are:
+## Contents
 
-* [ ] **Lab 1:** Introduction to OpenCV and Color Spaces 
-* [ ] **Lab 2:** Camera Calibration
-* [ ] **Lab 3:** Image processing and Features Extraction
-* [ ] **Lab 4:** Bag of Visual Words, Motion Detection, and Object Tracking
-* [ ] **Project:** Final Project
+| Lab | Topic |
+|---|---|
+| [Lab 1](Lab_1) | Introduction to OpenCV and color spaces |
+| [Lab 2](Lab_2) | Camera calibration |
+| [Lab 3](Lab_3) | Image processing and feature extraction |
+| [Lab 4](Lab_4) | Bag of Visual Words, motion detection and object tracking |
+| [Lab Project](Lab_Project) | Final project |
 
-Each structured session is designed to be completed in 2 hours in the lab. The additional, non-guided questions we propose in the lab manual are intended as homework to be done outside of class time.
+## Repository layout
 
-## Student Requirements
-
-As a student, you are expected to have a basic knowledge of Python. Some exercises are self-contained, but having a basic understanding of the theoretical concepts behind each lab session is highly recommended. The course at ICAI is structured so that enrolled students will always have a theory lesson prior to the lab session.
-
-For students outside ICAI or not enrolled in the course, we will provide relevant links for each lab session to help you get an introduction to the topic.
-
-## Resources
-
-An ``enviroment_$OSSystem$.yaml``file is provide to create a Conda environment with all required dependencies.
-
-``$OSSystem$`` - win for windows; unix for Unix and macos for Mac.
-
-💡 Tip: Create the Conda environment from this file:
-```bash
-conda env create -f environment.yml
-conda activate <env-name>
 ```
-If you update the file later, apply changes with:
-```bash
-conda env update -f environment.yml --prune
-```
-
-Each laboratory session contains the following:
-
-- 📄 **Guide**: A ``PDF`` guide with instructions to complete the session (currently only available in Spanish).
-- 💻 **Script**: a ``.ipynb`` or ``.py`` file to complete.
-- 🎞️ **Data**: A folder containing images to process.
-- 📝 **Template**: A folder with a ``latex`` template used to generate the guide. You can reuse it to write your report.
-- 🧩 **Assets**: Files to style or improve documentation.
-- 📖 **README**: With links to motivate the session or to introduce the theory concepts.
-
-The lab sessions folder are structured as follows:
-
-```bash
 .
-├── guide.pdf
-├── src
-│   ├── lab_session.ipynb
-│   ├── lab_session.py
-│   └── ...
-├── data
-│   ├── image1.png
-│   ├── image2.png
-│   └── ...
-├── assets
-├── template
-└── README
+├── Lab_N/
+│   ├── src/         # notebooks and helper modules
+│   ├── data/        # input images
+│   ├── assets/      # images used in documentation
+│   └── template/    # LaTeX report template
+├── final_reports/   # delivered reports (PDF)
+├── environment_win.yml
+├── environment_unix.yml
+└── environment_macos.yml
 ```
 
-## Expand
-If you want to learn more, we recommend checking out the following resources:
+## Setup
 
-- **[Book: *Programming Computer Vision with Python*](https://github.com/Ricky-Wilson/Programming-books/blob/master/PDF/OReilly.Programming.Computer.Vision.with.Python.Jun.2012.RETAIL.eBook-ELOHiM.pdf)**
-- **[Tutorials: PyImageSearch](https://pyimagesearch.com/category/tutorials/)**.  *Old but gold*: If you want to learn classic computer vision, check out the older pages of the archive.
+Create the Conda environment for your operating system (`win`, `unix` or `macos`) and activate it:
 
+```bash
+conda env create -f environment_<os>.yml
+conda activate voi-lab
+```
 
+Then open the notebooks in `Lab_N/src/` with Jupyter or VS Code.
 
-## Typos and Errors
+## Large files not included
 
-If you spot a typo or notice a mistake, feel free to reach out or submit a pull request. We greatly appreciate your cooperation! 🤗
+To keep the repository small, these are excluded through `.gitignore`. Running the notebooks regenerates the results.
 
-## Get in Touch
+## Credits
 
-If you have suggestions for exercises or want to share your thoughts, feel free to contact us at iderodrigo@comillas.edu. Also, if you find this repository helpful, we would appreciate it if you could give it a star.
-
-
-<h2 align="center">Let's start!</h2>
-<p align="center">
-  <img src="https://media.giphy.com/media/26BGIqWh2R1fi6JDa/giphy.gif" width="300" style="margin-bottom: 20px;" />
-</p>
+The lab guides, base code and data come from the course material of Comillas ICAI. The solutions, experiments and reports were written by the students Andrés Gil Vicente and Jorge Carnicero Príncipe.

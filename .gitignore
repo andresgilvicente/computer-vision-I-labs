@@ -1,2 +1,43 @@
-Lab_2/src/lab_2_solved.ipynb
-Lab_3/src/solved
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+
+# Generated results and trained models
+output/
+output_folder/
+*_results/
+Extra_Results/
+diferent_varThresholds/
+Lab_4/data/results/
+Lab_4/data/partB/optimized_param_results/
+Lab_4/data/partB/param_optimization_process/
+Lab_4/src/classifier_model.xml
+Lab_4/src/classifier_labels.json
+Lab_4/src/vocabulary.pickle
+*.pickle
+imagenes_esquinas_*/
+no_distorision_fisheye/
+
+# Large media (regenerable or downloadable)
+*.avi
+*.mp4
+Lab_4/data/partB/dataset/
+
+# Scratch work
+review_notes.ipynb

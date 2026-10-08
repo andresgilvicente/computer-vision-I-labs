@@ -133,4 +133,3 @@ dependencies:
       - scipy==1.13.1
       - tifffile==2024.8.30
       - zipp==3.23.0
-prefix: C:\Users\Erik\miniconda3\envs\voi-lab
