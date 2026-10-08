@@ -6,7 +6,9 @@
 
 # Computer Vision I — Lab Work
 
-Lab sessions for **Computer Vision I** (Comillas ICAI), implemented in Python with OpenCV. Each lab has its notebooks and helper code in `src/`, the input images in `data/`, and a LaTeX report template in `template/`. The delivered reports are in [`final_reports/`](final_reports/).
+Lab sessions for **Computer Vision I** (Comillas ICAI), implemented in Python with OpenCV. Each lab has its notebooks and helper code in `src/`, the input images in `data/`, and a LaTeX report template in `template/`. 
+
+The delivered reports are in [`final_reports/`](final_reports/).
 
 ## Contents
 
@@ -23,11 +25,11 @@ Lab sessions for **Computer Vision I** (Comillas ICAI), implemented in Python wi
 ```
 .
 ├── Lab_N/
-│   ├── src/         # notebooks and helper modules
-│   ├── data/        # input images
-│   ├── assets/      # images used in documentation
-│   └── template/    # LaTeX report template
-├── final_reports/   # delivered reports (PDF)
+│   ├── src/             # notebooks and helper modules
+│   ├── data/            # input images
+│   ├── assets/          # images used in documentation
+│   └── template/        # LaTeX report template
+├── final_reports/       # delivered reports (PDF)
 ├── environment_win.yml
 ├── environment_unix.yml
 └── environment_macos.yml
@@ -50,4 +52,8 @@ To keep the repository small, these are excluded through `.gitignore`. Running t
 
 ## Credits
 
-The lab guides, base code and data come from the course material of Comillas ICAI. The solutions, experiments and reports were written by the students Andrés Gil Vicente and Jorge Carnicero Príncipe.
+The lab guides, base code and data come from the course material of Comillas ICAI. 
+
+The solutions, experiments and reports were written by the students:
+ - Andrés Gil Vicente
+ - Jorge Carnicero Príncipe
