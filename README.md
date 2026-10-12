@@ -6,7 +6,11 @@
 
 # Computer Vision I — Lab Work
 
-Lab sessions for **Computer Vision I** (Comillas ICAI), implemented in Python with OpenCV. Each lab has its notebooks and helper code in `src/`, the input images in `data/`, and a LaTeX report template in `template/`. 
+**Development period:** September-December 2025
+
+Lab sessions for **Computer Vision I** (Comillas ICAI), implemented in Python with OpenCV. 
+
+Each lab has its notebooks and helper code in `src/`, the input images in `data/`, and a LaTeX report template in `template/`. 
 
 The delivered reports are in [`final_reports/`](final_reports/).
 
